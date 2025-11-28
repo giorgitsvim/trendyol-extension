@@ -32,54 +32,14 @@ class App {
     addCurrency()
     {
         let _this =  this;
-        // main page
-        let priceBox = $(document).find('.price-item');
+
+        let priceBox = $("font:contains('TL')");
         $.each(priceBox, function(key, element) {
-            let price = _this.priceConverter( $(element).text() );
+            let getPrice = $(element).parent().text().replace(' TL', '');
+            let price = _this.priceConverter( getPrice );
             let isPrice = $(element).closest('div').find('.converted-price');
             if(isPrice.length == 0) {
                 $(element).closest('div').append('<font class="converted-price"> (' + price + ' GEL)</font>');
-            }
-        });
-    
-        // detail page
-        let detailPriceBox = $(document).find('div > span > font font, .new-price');
-        $.each(detailPriceBox, function(key, element) {
-            let detailPrice = _this.priceConverter( $(element).text().replace(' TL', '') );
-            let isDetailPrice = $(element).closest('div').find('.converted-price');
-            if(isDetailPrice.length == 0 && !isNaN(detailPrice)) {
-                $(element).append('<font class="converted-price"> (' + detailPrice + ' GEL)</font>');
-            }
-        });
-
-        // favorite page
-        let FavoritePriceBox = $(document).find('.price-wrapper').find('div > font').closest('div');
-        $.each(FavoritePriceBox, function(key, element) {
-            let price = _this.priceConverter( $(element).text() );
-            let isPrice = $(element).find('.converted-price');
-            if(isPrice.length == 0) {
-                $(element).append('<font class="converted-price"> (' + price + ' GEL)</font>');
-            }
-        });
-    
-        // Cart page
-        let totalPriceBox = $(document).find('.pb-summary-total-price font font');
-        $.each(totalPriceBox, function(key, element) {
-            let totalPrice = _this.priceConverter( $(element).text().replace(' TL', '') );
-            let isDetailPrice = $(element).closest('font').find('.converted-price');
-            if(isDetailPrice.length == 0 && !isNaN(totalPrice)) {
-                $(element).append('<font class="converted-price"> (' + totalPrice + ' GEL)</font>');
-            }
-        });
-        
-    
-        // Buy page
-        totalPriceBox = $(document).find('span.ty-font-price font font');
-        $.each(totalPriceBox, function(key, element) {
-            let totalPrice = _this.priceConverter( $(element).text().replace(' TL', '') );
-            let isDetailPrice = $(element).closest('span').find('.converted-price');
-            if(isDetailPrice.length == 0 && !isNaN(totalPrice)) {
-                $(element).append('<font class="converted-price"> (' + totalPrice + ' GEL)</font>');
             }
         });
 
